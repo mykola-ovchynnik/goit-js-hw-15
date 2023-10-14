@@ -1,7 +1,7 @@
 const input = document.querySelector('input');
 const text = document.querySelector('#text');
 
-function fontAdjustment(evt) {
-  text.style.fontSize = `${evt.currentTarget.value}px`;
+function fontAdjustment() {
+  text.style.fontSize = `${this.value}px`;
 }
 input.addEventListener('input', fontAdjustment);

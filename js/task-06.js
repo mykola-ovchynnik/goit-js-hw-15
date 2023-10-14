@@ -2,11 +2,10 @@ const input = document.querySelector('input');
 const dataLength = parseInt(input.getAttribute('data-length'));
 
 function validationHandler(evt) {
-  const event = evt.currentTarget;
-  const isLengthValid = event.value.length === dataLength;
+  const isLengthValid = this.value.length === dataLength;
 
-  event.classList.toggle('valid', isLengthValid);
-  event.classList.toggle('invalid', !isLengthValid);
+  this.classList.toggle('valid', isLengthValid);
+  this.classList.toggle('invalid', !isLengthValid);
 }
 
 input.addEventListener('blur', validationHandler);
