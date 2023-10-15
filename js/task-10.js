@@ -1,11 +1,9 @@
-const input = document.querySelector('input');
-const dataCreate = document.querySelector('[data-create]');
-const dataDestroy = document.querySelector('[data-destroy');
-const boxes = document.querySelector('#boxes');
-
-dataCreate.addEventListener('click', createBoxes);
-
-dataDestroy.addEventListener('click', destroyBoxes);
+const selectors = {
+  input: document.querySelector('input'),
+  dataCreate: document.querySelector('[data-create]'),
+  dataDestroy: document.querySelector('[data-destroy'),
+  boxes: document.querySelector('#boxes'),
+};
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -13,8 +11,17 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
-function createBoxes() {
-  const amount = parseInt(input.value);
+const handleCreate = () => {
+  const amount = parseInt(selectors.input.value);
+  createBoxes(amount);
+  selectors.input.value = '';
+};
+
+const handleDestroy = () => {
+  destroyBoxes();
+};
+
+function createBoxes(amount) {
   let baseSize = 30; // size for the first box
 
   const createMarkup = Array.from({ length: amount }, (_, index) => {
@@ -23,9 +30,9 @@ function createBoxes() {
     baseSize += 10;
 
     return `<div class="box"
-      style="${boxStyle}">
-      <span class="box-index">${index + 1}</span>
-      </div>`;
+    style="${boxStyle}">
+    <span class="box-index">${index + 1}</span>
+    </div>`;
   });
 
   // for (let index = 0; index < amount; index += 1) {
@@ -40,10 +47,13 @@ function createBoxes() {
   //   );
   // }
 
-  boxes.insertAdjacentHTML('afterbegin', createMarkup.join('')); // insert of all boxes into html with one repaint
-  input.value = '';
+  selectors.boxes.insertAdjacentHTML('afterbegin', createMarkup.join('')); // insert of all boxes into html with one repaint
 }
 
 function destroyBoxes() {
   boxes.innerHTML = '';
 }
+
+selectors.dataCreate.addEventListener('click', handleCreate);
+
+selectors.dataDestroy.addEventListener('click', handleDestroy);
